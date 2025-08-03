@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title></title>
+    <style>
+        /* (same styling as before for black background, centered text, Montserrat font) */
+        body { background: #000; color: #eee; font-family: 'Montserrat', Arial, sans-serif; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; margin: 0; padding: 0 10px; }
+        #clock { font-size: 5em; letter-spacing: 3px; padding: 22px 48px; border-radius: 20px; background: #222; box-shadow: 0 0 18px #444; font-weight: 700; max-width: 100%; }
+        #timezone-label { color: #bbb; margin-top: 20px; font-size: 1.4em; font-weight: 400; max-width: 100%; word-break: break-word; }
+            header{font-size: 1.5cm;
+                   font-family: Product Sans;
+                   font-weight: 900;
+                   padding-bottom: 1.5cm;}
+           footer {
+      margin-top: auto;
+      background-color: #0d1117;
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #ccc;
+      border-top: 2px solid #1f2a36;
+      width: calc(100% - 2cm);
+      margin-left: 1cm;
+      margin-right: 1cm;
+      margin-top: 1cm;
+      border-radius: 16px;
+    }
+    footer a {
+      color: #72a4f2;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+    </style>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:700,400" rel="stylesheet">
+</head>
+<body>
+     <header><center>World Clock 🕛</center></header>
+    <div id="clock">00:00:00</div>
+    <div id="timezone-label"></div>
+<footer>
+    Made with 💓 &amp; Care by 
+    <a href="https://youtube.com/@PoorvithsLife_Official" target="_blank">Poorvith T.A</a>
+    <br><br>
+    <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
+    <script>
+    kofiwidget2.init('Support me on Ko-fi', '#72a4f2', 'O5O81GPS1N');
+    kofiwidget2.draw();
+    </script>
+    <br><br>
+    © 2025 Poorvith T.A • 
+    <a href="https://ig.me/m/i_am_poorvith" target="_blank">Contact Me</a>
+  </footer>
+<script>
+
+    function getParams() {
+        const params = new URLSearchParams(window.location.search);
+        let tz = params.get('tz') || 'UTC'; // tz with underscores
+        return {
+            tz: tz,
+            fmt24: params.get('f') === '1'
+        };
+    }
+
+    function updateClock() {
+        const { tz, fmt24 } = getParams();
+        const now = new Date();
+        const options = {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: !fmt24,
+            timeZone: tz
+        };
+        const locale = fmt24 ? 'en-GB' : 'en-US';
+        try {
+            const timeString = now.toLocaleTimeString(locale, options);
+            document.getElementById('clock').textContent = timeString;
+            document.getElementById('timezone-label').textContent =
+                tz.replace(/_/g, ' ') + (fmt24 ? " (24hr)" : " (12hr)");
+        } catch (e) {
+            document.getElementById('clock').textContent = "Invalid Timezone";
+            document.getElementById('timezone-label').textContent = "";
+        }
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock();
+</script>
+<script>
+var timezone =  document.getElementById('timezone-label').textContent
+document.title = timezone + "'s Time - Poorvith T.A";</script>
+</body>
+</html>
